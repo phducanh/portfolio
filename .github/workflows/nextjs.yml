@@ -74,6 +74,12 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
+        env:
+          REACT_APP_EMAILJS_USERID: ${{ secrets.REACT_APP_EMAILJS_USERID }}
+          REACT_APP_EMAILJS_TEMPLATEID: ${{ secrets.REACT_APP_EMAILJS_TEMPLATEID }}
+          REACT_APP_EMAILJS_RECEIVERID: ${{ secrets.REACT_APP_EMAILJS_RECEIVERID }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          FROM_EMAIL: ${{ secrets.FROM_EMAIL }}
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
